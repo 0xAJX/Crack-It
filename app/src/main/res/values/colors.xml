@@ -6,7 +6,11 @@
     <color name="graylight">#fafafa</color>
     <color name="starlight">#09c6df</color>
     <color name="endblue">#0bcce6</color>
-
+    <color name="dark_blue_75">#03121f</color>
+    <color name="blue">#FF004b7d</color>
+    <color name="purple">#190e66</color>
+    <color name="red">#d40000</color>
+    <color name="green">#17d102</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>
