@@ -17,6 +17,8 @@
         android:layout_marginTop="28dp"
         >
 
+
+
         <EditText
             android:outlineAmbientShadowColor="@color/starlight"
             android:id="@+id/num1"
