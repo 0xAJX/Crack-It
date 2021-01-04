@@ -45,87 +45,10 @@ class MainActivity : AppCompatActivity() {
         if (mode == "easy") maxTries = 15 else if (mode == "hard") maxTries = 10
 
         //EditText mExpirationYear,mCvvNumber;
-        binding.num1.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // TODO Auto-generated method stub
-                if (binding.num1.text.toString().trim { it <= ' ' }.length == 1) //size as per your requirement
-                {
-                    binding.num2.requestFocus()
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-                // TODO Auto-generated method stub
-            }
-
-            override fun afterTextChanged(s: Editable) {
-                // TODO Auto-generated method stub
-            }
-        })
-        binding.num2.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // TODO Auto-generated method stub
-                if (binding.num2.text.toString().trim { it <= ' ' }.length == 1) //size as per your requirement
-                {
-                    binding.num3.requestFocus()
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-                // TODO Auto-generated method stub
-            }
-
-            override fun afterTextChanged(s: Editable) {
-                // TODO Auto-generated method stub
-            }
-        })
-        binding.num3.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // TODO Auto-generated method stub
-                if (binding.num3.text.toString().trim { it <= ' ' }.length == 1) //size as per your requirement
-                {
-                    binding.num4.requestFocus()
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-                // TODO Auto-generated method stub
-            }
-
-            override fun afterTextChanged(s: Editable) {
-                // TODO Auto-generated method stub
-            }
-        })
-        binding.num4.addTextChangedListener(object : TextWatcher {
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // TODO Auto-generated method stub
-                if (binding.num4.text.toString().trim { it <= ' ' }.length == 1) //size as per your requirement
-                {
-                    binding.num5.requestFocus()
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence, start: Int,
-                                           count: Int, after: Int) {
-                // TODO Auto-generated method stub
-            }
-
-            override fun afterTextChanged(s: Editable) {
-                // TODO Auto-generated method stub
-            }
-        })
     }
 
     fun clear() {
-        binding.num1.setText("")
-        binding.num2.setText("")
-        binding.num3.setText("")
-        binding.num4.setText("")
-        binding.num5.setText("")
-        binding.num1.requestFocus()
+
     }
 
     fun imageChange(a: Char, i: Int) {
@@ -173,19 +96,11 @@ class MainActivity : AppCompatActivity() {
     //This method is used to retrieve the data from num text
     val data: IntArray
         get() {
-
-            if (binding.num1.text.toString() == null || binding.num2.text.toString() == null || binding.num3.text.toString() == null || binding.num4.text.toString() == null || binding.num5.text.toString() == null) {
-                num[0] = -1
-            } else if (isSpecial(binding.num1) || isSpecial(binding.num2) || isSpecial(binding.num3) || isSpecial(binding.num4) || isSpecial(binding.num5)) {
-                num[0] = -1
-            } else {
-                num[0] = binding.num1.text.toString().toInt()
-                num[1] = binding.num2.text.toString().toInt()
-                num[2] = binding.num3.text.toString().toInt()
-                num[3] = binding.num4.text.toString().toInt()
-                num[4] = binding.num5.text.toString().toInt()
-            }
-            Log.i("input101", Integer.toString(num[0]))
+                num[0] = binding.num1.value
+                num[1] = binding.num2.value
+                num[2] = binding.num3.value
+                num[3] = binding.num4.value
+                num[4] = binding.num5.value
             return num
         }
 
@@ -273,7 +188,7 @@ class MainActivity : AppCompatActivity() {
         iView[3] = findViewById<View>(R.id.iview4) as ImageView
         iView[4] = findViewById<View>(R.id.iview5) as ImageView
 
-        addToArray.add(Item(binding.num1.text.toString(), binding.num2.text.toString(), binding.num3.text.toString(), binding.num4.text.toString(), binding.num5.text.toString(), iView[0]!!.tag as Int, iView[1]!!.tag as Int, iView[2]!!.tag as Int, iView[3]!!.tag as Int, iView[4]!!.tag as Int))
+        addToArray.add(Item(binding.num1.value.toString(), binding.num2.value.toString(), binding.num3.value.toString(), binding.num4.value.toString(), binding.num5.value.toString(), iView[0]!!.tag as Int, iView[1]!!.tag as Int, iView[2]!!.tag as Int, iView[3]!!.tag as Int, iView[4]!!.tag as Int))
 
         val adapter: customAdapter = customAdapter()
         val gamelistView = findViewById<ListView>(R.id.gameListView)
@@ -285,7 +200,6 @@ class MainActivity : AppCompatActivity() {
         if (win) {
             // System.out.println("You guessed the correct answer");
             Log.i("Win", "Winner Winner Chicken Dinner")
-            Log.i("tries", "tries required for cracking the code " + Integer.toString(tries))
             Toast.makeText(this@MainActivity, "You Win", Toast.LENGTH_SHORT).show()
             val intent = Intent(this@MainActivity, EndScreenActivity::class.java).putExtra("who", Integer.toString(tries))
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
